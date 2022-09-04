@@ -12,12 +12,11 @@ export interface Card {
   id: number;
   employeeId: number;
   number: string;
-  cardholderName: string;
+  cardholderName: string | Promise<string>;
   securityCode: string;
   expirationDate: string;
-  password?: string;
+  password?: string | null;
   isVirtual: boolean;
-  originalCardId?: number;
   isBlocked: boolean;
   type: TransactionTypes;
 }
@@ -76,7 +75,6 @@ export async function insert(cardData: CardInsertData) {
     expirationDate,
     password,
     isVirtual,
-    originalCardId,
     isBlocked,
     type,
   } = cardData;
@@ -84,8 +82,8 @@ export async function insert(cardData: CardInsertData) {
   connection.query(
     `
     INSERT INTO cards ("employeeId", number, "cardholderName", "securityCode",
-      "expirationDate", password, "isVirtual", "originalCardId", "isBlocked", type)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      "expirationDate", password, "isVirtual", "isBlocked", type)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   `,
     [
       employeeId,
@@ -95,7 +93,6 @@ export async function insert(cardData: CardInsertData) {
       expirationDate,
       password,
       isVirtual,
-      originalCardId,
       isBlocked,
       type,
     ]
