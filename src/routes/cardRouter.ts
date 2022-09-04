@@ -1,10 +1,11 @@
 import express from "express"
 
 import { createCard } from "../controllers/cardController"
-import { validateCardType } from "../middlewares/cardMiddleware"
+import { verifyApiKey } from "../middlewares/authMiddleware"
+import { validateCreateCardData } from "../middlewares/cardMiddleware"
 
 const cardRouter = express.Router()
 
-cardRouter.post("/card/create", validateCardType, createCard)
+cardRouter.post("/card/create", verifyApiKey, validateCreateCardData, createCard)
 
 export default cardRouter
