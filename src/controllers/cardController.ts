@@ -34,7 +34,7 @@ export async function displayBalance(req: Request, res: Response) {
 export async function blockCard(req: Request, res: Response) {
     const { id, password}: {id: number, password: string} = req.body
 
-    await cardService.displayBalance(Number(id), password)
+    await cardService.blockCard(Number(id), password)
 
     res.sendStatus(200)
 }

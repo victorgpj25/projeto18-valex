@@ -15,7 +15,7 @@ export interface Card {
   cardholderName: string | Promise<string>;
   securityCode: string;
   expirationDate: string;
-  password?: string | null;
+  password?: string;
   isVirtual: boolean;
   isBlocked: boolean;
   type: TransactionTypes;

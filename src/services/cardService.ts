@@ -3,6 +3,7 @@ import * as cardRepository from "../repositories/cardRepository"
 import * as createCardUtils from "../utils/createCardUtils"
 import * as activateCardUtils from "../utils/activateCardUtils"
 import * as displayBalanceUtils from "../utils/displayBalanceUtils"
+import * as blockCardUtils from "../utils/blockCardUtils"
 
 export async function createCard(employeeId: number, type: cardRepository.TransactionTypes) {
     await createCardUtils.validateEmployee(employeeId)
@@ -14,7 +15,6 @@ export async function createCard(employeeId: number, type: cardRepository.Transa
         cardholderName: await createCardUtils.formatCardholderName(employeeId),
         securityCode: createCardUtils.generateCardSecurityCode(),
         expirationDate: createCardUtils.generateCardExpirationDate(),
-        password: null,
         isVirtual: false,
         isBlocked: false,
         type
@@ -40,5 +40,17 @@ export async function displayBalance(id: number) {
     const balanceData = await displayBalanceUtils.getBalanceData(id)
 
     return balanceData
+}
+
+export async function blockCard(id: number, password: string) {
+    await blockCardUtils.verifyCardStatus(id)
+    await blockCardUtils.verifyPassword(id, password)
+
+    const cardUpdateData: cardRepository.CardUpdateData = {
+        isBlocked: true
+    }
+
+    await cardRepository.update(id, cardUpdateData)
+    
 }
 
