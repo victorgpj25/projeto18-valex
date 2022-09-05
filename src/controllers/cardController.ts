@@ -23,3 +23,11 @@ export async function activateCard(req: Request, res: Response) {
     res.sendStatus(200)
 }
 
+export async function displayBalance(req: Request, res: Response) {
+    const { id}: {id: number} = req.body
+
+    const balanceData = await cardService.displayBalance(Number(id))
+
+    res.status(200).send(balanceData)
+}
+
