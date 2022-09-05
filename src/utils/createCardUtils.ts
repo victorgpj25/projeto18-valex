@@ -9,7 +9,7 @@ const cryptr = new Cryptr("superSecretKey")
 
 export async function validateEmployee(employeeId: number) {
     const employee = await employeeRepository.findById(employeeId)
-    if (!employee) throw {code: "employee_not_registered", message: "Sent employeeId is not registered"}
+    if (!employee) throw {code: "employee_not_registered", message: "Given employeeId is not registered"}
 }
 
 export async function verifyCardConflict(employeeId: number, type: cardRepository.TransactionTypes) {
