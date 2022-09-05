@@ -24,5 +24,4 @@ cardRouter.post("/card/balance", validateDisplayBalanceReqBody, displayBalance)
 cardRouter.post("/card/block", validateBlockCardReqBody, blockCard)
 cardRouter.post("/card/unblock", validateUnblockCardReqBody, unblockCard)
 
-
 export default cardRouter
