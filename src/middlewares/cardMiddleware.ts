@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 
-import { createCardSchema, activateCardSchema, displayBalanceSchema } from "../schemas/cardSchema"
+import { 
+    createCardSchema, 
+    activateCardSchema, 
+    displayBalanceSchema, 
+    blockCardSchema
+} from "../schemas/cardSchema"
 
 export function validateCreateCardData(req: Request, res: Response, next: NextFunction) {
     const validation = createCardSchema.validate(req.body)
@@ -26,6 +31,16 @@ export function validateDisplayBalanceReqBody(req: Request, res: Response, next:
     const validation = displayBalanceSchema.validate(req.body)
     if (validation.error) {
         res.status(422).send({ErrorMessage: "Balance display failed due to " + validation.error})
+        return
+    }
+
+    next();
+}
+
+export function validateBlockCardReqBody(req: Request, res: Response, next: NextFunction) {
+    const validation = blockCardSchema.validate(req.body)
+    if (validation.error) {
+        res.status(422).send({ErrorMessage: "Card lock failed due to " + validation.error})
         return
     }
 
