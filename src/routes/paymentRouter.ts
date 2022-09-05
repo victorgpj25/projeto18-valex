@@ -5,6 +5,6 @@ import { validateRegisterPaymentReqBody } from "../middlewares/paymentMiddleware
 
 const paymentRouter = express.Router()
 
-paymentRouter.post("/payment/register", validateRegisterPaymentReqBody, registerPayment)
+paymentRouter.post("/payment", validateRegisterPaymentReqBody, registerPayment)
 
 export default paymentRouter
