@@ -8,7 +8,7 @@ const rechargeCardSchema = joi.object({
         }),
     amount: joi.number().integer().positive().required()
         .messages({
-            "any.required": "Password is required",
+            "any.required": "Amount is required",
             "number.base": "Sent recharge amount is not valid",
             "number.integer": "Recharge amount must be an integer",
             "number.positive": "Recharge amount must be a positive number"

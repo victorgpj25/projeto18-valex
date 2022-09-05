@@ -1,7 +1,7 @@
 import express from "express"
 
-import { registerPayment } from "../controllers/rechargeController"
-import { validateRegisterPaymentReqBody } from "../middlewares/rechargeMiddleware"
+import { registerPayment } from "../controllers/paymentController"
+import { validateRegisterPaymentReqBody } from "../middlewares/paymentMiddleware"
 
 const paymentRouter = express.Router()
 
