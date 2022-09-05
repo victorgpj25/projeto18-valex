@@ -22,12 +22,16 @@ export default function errorHandler(error: any, req: Request, res: Response, ne
     if (error.code === "card_already_blocked") {
         return res.status(409).send({ErrorMessage: error.message})
     }
+    if (error.code === "card_not_blocked") {
+        return res.status(409).send({ErrorMessage: error.message})
+    }
     if (error.code === "wrong_security_code") {
         return res.status(401).send({ErrorMessage: error.message})
     }
     if (error.code === "wrong_password") {
         return res.status(401).send({ErrorMessage: error.message})
     }
+    
 
     res.sendStatus(500)
 }

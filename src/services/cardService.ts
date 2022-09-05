@@ -4,6 +4,7 @@ import * as createCardUtils from "../utils/createCardUtils"
 import * as activateCardUtils from "../utils/activateCardUtils"
 import * as displayBalanceUtils from "../utils/displayBalanceUtils"
 import * as blockCardUtils from "../utils/blockCardUtils"
+import * as unblockCardUtils from "../utils/unblockCardUtils"
 
 export async function createCard(employeeId: number, type: cardRepository.TransactionTypes) {
     await createCardUtils.validateEmployee(employeeId)
@@ -51,6 +52,16 @@ export async function blockCard(id: number, password: string) {
     }
 
     await cardRepository.update(id, cardUpdateData)
-    
+}
+
+export async function unblockCard(id: number, password: string) {
+    await unblockCardUtils.verifyCardStatus(id)
+    await blockCardUtils.verifyPassword(id, password)
+
+    const cardUpdateData: cardRepository.CardUpdateData = {
+        isBlocked: false
+    }
+
+    await cardRepository.update(id, cardUpdateData)
 }
 
