@@ -1,4 +1,3 @@
-import * as employeeRepository from "../repositories/employeeRepository"
 import * as cardRepository from "../repositories/cardRepository"
 import * as createCardUtils from "../utils/createCardUtils"
 import * as activateCardUtils from "../utils/activateCardUtils"

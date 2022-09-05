@@ -19,6 +19,9 @@ export default function errorHandler(error: any, req: Request, res: Response, ne
     if (error.code === "card_already_activated") {
         return res.status(409).send({ErrorMessage: error.message})
     }
+    if (error.code === "card_not_activated") {
+        return res.status(400).send({ErrorMessage: error.message})
+    }
     if (error.code === "card_already_blocked") {
         return res.status(409).send({ErrorMessage: error.message})
     }
