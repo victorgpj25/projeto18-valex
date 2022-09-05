@@ -46,3 +46,13 @@ export function validateBlockCardReqBody(req: Request, res: Response, next: Next
 
     next();
 }
+
+export function validateUnblockCardReqBody(req: Request, res: Response, next: NextFunction) {
+    const validation = blockCardSchema.validate(req.body)
+    if (validation.error) {
+        res.status(422).send({ErrorMessage: "Card unlock failed due to " + validation.error})
+        return
+    }
+
+    next();
+}
