@@ -48,3 +48,6 @@ export function generateCardExpirationDate() {
 export function generateCardSecurityCode() {
     return cryptr.encrypt(faker.random.numeric(3))
 }
+
+
+

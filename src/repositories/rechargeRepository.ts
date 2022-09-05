@@ -3,7 +3,7 @@ import { connection } from "../databases/postgres";
 export interface Recharge {
   id: number;
   cardId: number;
-  timestamp: Date;
+  timestamp: string | Date;
   amount: number;
 }
 export type RechargeInsertData = Omit<Recharge, "id" | "timestamp">;
