@@ -36,4 +36,12 @@ const activateCardSchema = joi.object({
         })
 })
 
-export { createCardSchema, activateCardSchema }
+const displayBalanceSchema = joi.object({
+    id: joi.number().required()
+        .messages({
+            "any.required": "card id is required",
+            "number.base": "Sent card id is not valid"
+        })
+})
+
+export { createCardSchema, activateCardSchema, displayBalanceSchema }
