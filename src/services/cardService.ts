@@ -2,6 +2,7 @@ import * as employeeRepository from "../repositories/employeeRepository"
 import * as cardRepository from "../repositories/cardRepository"
 import * as createCardUtils from "../utils/createCardUtils"
 import * as activateCardUtils from "../utils/activateCardUtils"
+import * as displayBalanceUtils from "../utils/displayBalanceUtils"
 
 export async function createCard(employeeId: number, type: cardRepository.TransactionTypes) {
     await createCardUtils.validateEmployee(employeeId)
@@ -31,5 +32,13 @@ export async function activateCard(id: number, securityCode: string, password: s
     }
 
     await cardRepository.update(id, cardUpdateData)
+}
+
+export async function displayBalance(id: number) {
+    await displayBalanceUtils.verifyCardStatus(id)
+
+    const balanceData = await displayBalanceUtils.getBalanceData(id)
+
+    return balanceData
 }
 
