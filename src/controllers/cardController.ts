@@ -10,9 +10,9 @@ export async function createCard(req: Request, res: Response) {
     const apiKey = req.headers["x-api-key"].toString()
 
     await companyService.validateApiKey(apiKey)
-    await cardService.createCard(Number(employeeId), type)
+    const cardData = await cardService.createCard(Number(employeeId), type)
 
-    res.sendStatus(201)
+    res.status(201).send(cardData)
 }
 
 export async function activateCard(req: Request, res: Response) {

@@ -8,19 +8,26 @@ import * as unblockCardUtils from "../utils/unblockCardUtils"
 export async function createCard(employeeId: number, type: cardRepository.TransactionTypes) {
     await createCardUtils.validateEmployee(employeeId)
     await createCardUtils.verifyCardConflict(employeeId, type)
-
+    const securityCode: {decrypted: string, encrypted: string} = createCardUtils.generateCardSecurityCode()
+    
     const cardInsertData: cardRepository.CardInsertData = {
         employeeId,
         number: createCardUtils.generateCardNumber(),
         cardholderName: await createCardUtils.formatCardholderName(employeeId),
-        securityCode: createCardUtils.generateCardSecurityCode(),
+        securityCode: securityCode.encrypted,
         expirationDate: createCardUtils.generateCardExpirationDate(),
         isVirtual: false,
         isBlocked: false,
         type
     }
 
+    const cardReturnData: {securityCode: string} = {
+        securityCode: securityCode.decrypted
+    }
+
     await cardRepository.insert(cardInsertData)
+
+    return cardReturnData
 }
 
 export async function activateCard(id: number, securityCode: string, password: string) {
